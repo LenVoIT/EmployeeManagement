@@ -5,13 +5,16 @@ import vn.edu.likelion.entity.NhanVien;
 import vn.edu.likelion.entity.PhongBan;
 import vn.edu.likelion.service.PhongBanServiceImpl;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class app {
-    public static PhongBan pb = new PhongBan();
-    public static NhanVien nv = new NhanVien();
+    public static PhongBan phongBan = new PhongBan();
+    public static NhanVien nhanVien = new NhanVien();
     public static Scanner s = new Scanner(System.in);
+
     public static void main(String[] args) throws Exception {
+        ArrayList<PhongBan> phongBans = new ArrayList<>();
         System.out.println("\t\tPHẦN MỀM QUẢN LÝ NHÂN VIÊN");
 
         boolean cont = true;
@@ -31,32 +34,39 @@ public class app {
             int choose = s.nextInt();
             switch (choose) {
                 case 1:
-                    pb.showlistPB();
+                    phongBan.showlistPB();
                     break;
                 case 2:
-                    pb.addPhongBan(pb);
+                    phongBan.addPhongBan(phongBan);
                     break;
                 case 3:
-//                    pb.updatePB();
+                    System.out.print("Nhập mã phòng ban muốn chỉnh sửa: ");
+                    int editId = s.nextInt();
+                    phongBan.updatePhongBan(editId,phongBans,phongBan);
                     break;
                 case 4:
+                    System.out.print("Nhập mã phòng ban muốn xóa: ");
+                    int delId = s.nextInt();
 
                     break;
                 case 5:
-                    System.out.println("Nhập mã phòng ban muốn xem chi tiết: ");
+                    System.out.print("Nhập mã phòng ban muốn xem chi tiết: ");
+                    int searchId = s.nextInt();
+                    phongBan.showDetailPB(searchId, phongBan);
                     break;
                 case 6:
-                    nv.addNhanVien();
+                    nhanVien.addNhanVien(nhanVien);
                     break;
                 case 7:
-
+                    System.out.print("Nhập mã nhân viên muốn chỉnh sửa: ");
+                    int editNVId = s.nextInt();
                     break;
                 case 8:
-
-
+                    System.out.print("Nhập mã nhân viên muốn xóa: ");
+                    int deleteNVId = s.nextInt();
                     break;
                 case 9:
-                    nv.showNV();
+                    nhanVien.showNV();
                     break;
                 case 10:
                     System.out.print("Nhập mã nhân viên muốn xem chi tiết: ");

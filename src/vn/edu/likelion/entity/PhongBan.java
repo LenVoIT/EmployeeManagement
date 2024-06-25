@@ -47,18 +47,16 @@ public class PhongBan {
         this.id = id;
     }
 
-    public void addPhongBan(PhongBan pb) {
-        String pbName;
-        checkIdPB(pb);
-        System.out.println(pb.getId());
+    public void addPhongBan(PhongBan phongBan) {
+        checkIdPB(phongBan);
+        System.out.println(phongBan.getId());
+//        checkTenPB(phongBan);
+//        System.out.println(phongBan.getDepartmentName());
+        System.out.print("Nhập tên phòng ban: ");
+        String pbName = s.next();
+        lPBs.add(new PhongBan(id, pbName));
 
-//        checkTenPB(pb);
-        System.out.print("Nhập tên phòng ban");
-        pbName = s.next();
-        System.out.println(pb.getDepartmentName());
-
-        lPBs.add(pb);
-//        int emNum;
+//        lPBs.add(phongBan);
 //        do {
 //            System.out.print("Nhập số lượng nhân viên: ");
 //            emNum = s.nextInt();
@@ -66,83 +64,108 @@ public class PhongBan {
 //                System.out.println("Nhập sai số lượng, nhập lại");
 //            }
 //        } while (emNum > 3 || emNum < 1);
-
-        System.out.println("Thêm thành công");
     }
 
     //kiểm tra trùng id
-    public static int checkIdPB(PhongBan pb) {
-        System.out.println("Nhập id phòng ban: ");
-        int id = s.nextInt();
-        if (pb.getId() == id) {
-            System.out.println("Trùng id phòng ban. Nhập lại");
-        } else {
-            pb.setId(id);
+    public static int checkIdPB(PhongBan phongBan) {
+        while (true) {
+            System.out.print("Nhập id phòng ban: ");
+            int id = s.nextInt();
+            if (phongBan.getId() == id) {
+                System.out.println("Trùng id phòng ban. Nhập lại");
+            } else {
+                phongBan.setId(id);
+                break;
+            }
         }
-        return pb.getId();
+        return phongBan.getId();
     }
+
     //kiểm tra tên rỗng
-    /*public static String checkTenPB(PhongBan pb) {
-        System.out.println("Nhập tên phòng ban: ");
-        String pbName = s.next();
-        if (pb.getDepartmentName().isEmpty()) {
-            System.out.println("Vui lòng nhập tên phòng ban");
-        } else {
-            pb.setDepartmentName(pbName);
+    public static String checkTenPB(PhongBan phongBan) {
+        while (true) {
+            System.out.print("Nhập tên phòng ban: ");
+            String pbName = s.next();
+            if (pbName.isEmpty()) {
+                System.out.println("Vui lòng nhập tên phòng ban");
+            } else {
+                phongBan.setDepartmentName(pbName);
+                break;
+            }
         }
-        return pb.getDepartmentName();
-    }*/
+        return phongBan.getDepartmentName();
+    }
 
     public void showlistPB() {
-        HashMap<String, Integer> map = new HashMap<>();
-
-        for (PhongBan pb : lPBs) {
-            System.out.println("Id phòng ban:" + pb.getId());
-            System.out.println("Tên phòng ban:" + pb.getDepartmentName());
+        for (PhongBan phongBan : lPBs) {
+            System.out.println("Id phòng ban:" + phongBan.getId());
+            System.out.println("Tên phòng ban:" + phongBan.getDepartmentName());
             //int emA = pb.getEmployeeAmount();
 //            System.out.println("Số lượng nhân viên phòng ban:" + );
 
         }
     }
 
+    public void showDetailPB(int id, PhongBan phongBan) {
+        if (phongBan.getId() == id) {
+            for (PhongBan phongban : lPBs) {
+                System.out.println("Id: " + phongban.getId());
+                System.out.println("Tên phòng ban: " + phongban.getDepartmentName());
+                System.out.println("Danh sách nhân viên");
+            }
+        }
+    }
+
+
 //    public void updatePB(int id, ArrayList<PhongBan> phongBans, PhongBan pb) {
-//        Scanner s = new Scanner(System.in);
+//
 //        boolean isExisted = false;
-//        String pbName;
 //        System.out.print("Nhập vào mã phòng ban cần cập nhật: ");
 //        int idPB = s.nextInt();
+//        System.out.print("Nhập tên: ");
+//        String pbName = s.nextLine();
 //        for (PhongBan p : phongBans) {
 //            if (p.getId() != id) {
 //                p.setDepartmentName(pbName);
 //            }
-                /* //duyệt phần tử theo kích thước
-                int size = lPBs.size();
-                for (int i = 0; i < size; i++) {
-                    //tìm phòng ban theo id
-                    if (lPBs.get(i).getId() == i) {
-//                    isExisted = true;
-                        System.out.print("Nhập vào tên phòng ban: ");
-                        pbName = s.nextLine();
-                        System.out.print("Nhập vào số lượng nhân viên: ");
-                        int emNum = s.nextInt();
-                        lPBs.get(i).setDepartmentName(pbName);
-//                        lPBs.get(i).setEmployeeAmount(emNum);
-                        break;
-                    }
-                }
-                if (!isExisted) {
-                    System.out.println("Mã phòng ban không tồn tại!");
-                } else {
-                    System.out.println("Cập nhật phòng ban thành công!");
-                }*/
+//            //duyệt phần tử theo kích thước
+//            int size = lPBs.size();
+//            for (int i = 0; i < size; i++) {
+//                //tìm phòng ban theo id
+//                if (lPBs.get(i).getId() == i) {
+////                    isExisted = true;
+//                    System.out.print("Nhập vào tên phòng ban: ");
+//                    pbName = s.nextLine();
+//                    System.out.print("Nhập vào số lượng nhân viên: ");
+//                    int emNum = s.nextInt();
+//                    lPBs.get(i).setDepartmentName(pbName);
+////                        lPBs.get(i).setEmployeeAmount(emNum);
+//                    break;
+//                }
 //            }
-//
-//
+//            if (!isExisted) {
+//                System.out.println("Mã phòng ban không tồn tại!");
+//            } else {
+//                System.out.println("Cập nhật phòng ban thành công!");
+//            }
 //        }
+//
+//
 //    }
-//    public void showDetailPB() {
-//        int id;
-//        }
+//}
+    public void updatePhongBan(int id, ArrayList<PhongBan> phongBans, PhongBan phongBan) {
+        System.out.print("Nhập tên: ");
+        String name = s.nextLine();
+        for (PhongBan p : phongBans) {
+            if (p.getId() != id) {
+                phongBan.setDepartmentName(name);
+                phongBans.remove(p);
+            }
+        }
+    }
+    public void deletePhongBan(int id,PhongBan phongBan){
+
+    }
 }
 
 

@@ -14,7 +14,7 @@ public class NhanVien {
     private String joinDate;
     private String departmentName;
     private ArrayList<NhanVien> nviens;
-    Scanner s = new Scanner(System.in);
+    static Scanner s = new Scanner(System.in);
     public int getId() {
         return id;
     }
@@ -67,15 +67,17 @@ public class NhanVien {
         this.departmentName = departmentName;
     }
 
-    public void addNhanVien() {
+    public void addNhanVien(NhanVien nhanVien) {
         System.out.print("Nhập số lượng nhân viên muốn thêm: ");
         int slnv = s.nextInt();
-        if (slnv < 1 || slnv > 4){
+        if (slnv < 1 || slnv > 3){
             System.out.print("Nhập sai số lượng, nhập lại\n");
+            addNhanVien(nhanVien);
         }else {
             for(int i = 0; i<slnv;i++) {
-                System.out.print("Nhập id nhân viên:");
-                int id = s.nextInt();
+//                System.out.print("Nhập id nhân viên:");
+//                int id = s.nextInt();
+                checkIdNV(nhanVien);
                 System.out.print("Nhập tên nhân viên:");
                 String nvName = s.next();
                 System.out.print("Nhập tuổi nhân viên:");
@@ -105,32 +107,25 @@ public class NhanVien {
             System.out.println("Thuộc phòng ban:" + nvpb);
         }
     }
+    public static int checkIdNV(NhanVien nhanVien) {
+        while (true) {
+            System.out.print("Nhập id nhân viên: ");
+            int id = s.nextInt();
+            if (nhanVien.getId() == id) {
+                System.out.println("Trùng id nhân viên. Nhập lại");
+            } else {
+                nhanVien.setId(id);
+                break;
+            }
+        }
+        return nhanVien.getId();
+    }
     public int showDetailNV(int id){
         return 0;
     }
     public void updateNhanVien(int id, ArrayList<NhanVien> nviens, NhanVien nhanVien)throws Exception{
-        System.out.print("Nhập tên: ");
-        String name = s.nextLine();
-        System.out.print("Nhập tuổi");
-        int age = s.nextInt();
-        System.out.print("Nhập phòng ban: ");
-        String department = s.nextLine();
-        boolean isExist = false;
-
-        for(NhanVien nv : nviens) {
-            if (nv.getId() != id) {
-                nhanVien.setEmployeeName(name);
-                nhanVien.setAge(age);
-                nhanVien.setDepartmentName(department);
-                isExist = true;
-                nviens.remove(nv);
-                break;
-            }
-            if(!isExist) {
-                throw new NullPointerException("Id not null");
-            }
-        }
+    }
+    public void deleteNhanVien(int id, NhanVien nhanVien){
 
     }
-
 }
