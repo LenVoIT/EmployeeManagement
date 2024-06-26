@@ -1,6 +1,5 @@
 package vn.edu.likelion.entity;
 
-import vn.edu.likelion.service.NhanVienService;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ public class NhanVien {
     private String departmentName;
     private ArrayList<NhanVien> nviens;
     static Scanner s = new Scanner(System.in);
+
     public int getId() {
         return id;
     }
@@ -70,11 +70,11 @@ public class NhanVien {
     public void addNhanVien(NhanVien nhanVien) {
         System.out.print("Nhập số lượng nhân viên muốn thêm: ");
         int slnv = s.nextInt();
-        if (slnv < 1 || slnv > 3){
+        if (slnv < 1 || slnv > 3) {
             System.out.print("Nhập sai số lượng, nhập lại\n");
             addNhanVien(nhanVien);
-        }else {
-            for(int i = 0; i<slnv;i++) {
+        } else {
+            for (int i = 0; i < slnv; i++) {
 //                System.out.print("Nhập id nhân viên:");
 //                int id = s.nextInt();
                 checkIdNV(nhanVien);
@@ -85,33 +85,20 @@ public class NhanVien {
                 System.out.print("Nhập ngày tham gia(dd/MM/yyyy): ");
                 SimpleDateFormat sdf_ddMMyyyy = new SimpleDateFormat("dd/MM/yyyy");
                 String date = s.next();
-                String nvpb;
                 System.out.print("Thuộc phòng ban: ");
-                nvpb = s.next();
+                String nvpb = s.next();
                 nviens.add(new NhanVien(id, nvName, age, date, nvpb));
             }
         }
     }
-    public void showNV() {
-        HashMap<String, Integer> map = new HashMap<>();
-        for (NhanVien nv : nviens) {
-            int id = nv.getId();
-            String nvName = nv.getEmployeeName();
-            int age = nv.getAge();
-            String date = nv.getJoinDate();
-            String nvpb = nv.getDepartmentName();
-            System.out.println("Id nhân viên:" + id);
-            System.out.println("Tên nhân viên:" + nvName);
-            System.out.println("Tuổi nhân viên:" + age);
-            System.out.println("Ngày tham gia:" + date);
-            System.out.println("Thuộc phòng ban:" + nvpb);
-        }
-    }
+
     public static int checkIdNV(NhanVien nhanVien) {
         while (true) {
             System.out.print("Nhập id nhân viên: ");
             int id = s.nextInt();
-            if (nhanVien.getId() == id) {
+            if (id < 1) {
+                System.out.println("Không nhập dưới 1");
+            } else if (nhanVien.getId() == id) {
                 System.out.println("Trùng id nhân viên. Nhập lại");
             } else {
                 nhanVien.setId(id);
@@ -120,12 +107,28 @@ public class NhanVien {
         }
         return nhanVien.getId();
     }
-    public int showDetailNV(int id){
+
+    public void showlistNV() {
+        if (nviens.isEmpty()) {
+            System.out.println("Không có nhân viên để show");
+        } else {
+            System.out.println("Id\t Tên nhân viên\t Tuổi nhân viên \t Ngày tham gia \t Phòng ban");
+            for (NhanVien nv : nviens) {
+//                    int id = nv.getId();
+                System.out.println(nv.getId() + "\t\t" + nv.getEmployeeName() + "\t\t\t\t" + nv.getAge()
+                        + "\t\t\t\t\t" + nv.getJoinDate() + "\t\t" + nv.getDepartmentName());
+            }
+        }
+    }
+
+    public int showDetailNV(int id) {
         return 0;
     }
-    public void updateNhanVien(int id, ArrayList<NhanVien> nviens, NhanVien nhanVien)throws Exception{
+
+    public void updateNhanVien(int id, ArrayList<NhanVien> nviens, NhanVien nhanVien) throws Exception {
     }
-    public void deleteNhanVien(int id, NhanVien nhanVien){
+
+    public void deleteNhanVien(int id, NhanVien nhanVien) {
 
     }
 }

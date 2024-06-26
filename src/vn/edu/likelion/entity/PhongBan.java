@@ -9,7 +9,6 @@ public class PhongBan {
     private String departmentName;
     //    private int employeeAmount;
     static private ArrayList<PhongBan> lPBs;
-
     static Scanner s = new Scanner(System.in);
 
     public PhongBan(int id, String departmentName) {//, int employeeAmount) {
@@ -49,14 +48,12 @@ public class PhongBan {
 
     public void addPhongBan(PhongBan phongBan) {
         checkIdPB(phongBan);
-        System.out.println(phongBan.getId());
-//        checkTenPB(phongBan);
-//        System.out.println(phongBan.getDepartmentName());
+//
         System.out.print("Nhập tên phòng ban: ");
         String pbName = s.next();
         lPBs.add(new PhongBan(id, pbName));
 
-//        lPBs.add(phongBan);
+//
 //        do {
 //            System.out.print("Nhập số lượng nhân viên: ");
 //            emNum = s.nextInt();
@@ -71,7 +68,9 @@ public class PhongBan {
         while (true) {
             System.out.print("Nhập id phòng ban: ");
             int id = s.nextInt();
-            if (phongBan.getId() == id) {
+            if(id < 1){
+                System.out.println("Không nhập dưới 1");
+            }else if (phongBan.getId() == id) {
                 System.out.println("Trùng id phòng ban. Nhập lại");
             } else {
                 phongBan.setId(id);
@@ -97,12 +96,16 @@ public class PhongBan {
     }
 
     public void showlistPB() {
-        for (PhongBan phongBan : lPBs) {
-            System.out.println("Id phòng ban:" + phongBan.getId());
-            System.out.println("Tên phòng ban:" + phongBan.getDepartmentName());
-            //int emA = pb.getEmployeeAmount();
-//            System.out.println("Số lượng nhân viên phòng ban:" + );
+        if (lPBs.isEmpty()) {
+            System.out.println("Không có phòng ban nào để show");
+        } else {
+            System.out.println("Id\t\t Tên phòng ban");
+            for (PhongBan phongBan : lPBs) {
+                System.out.println(phongBan.getId() + "\t\t\t" + phongBan.getDepartmentName());
 
+                //int emA = pb.getEmployeeAmount();
+//            System.out.println("Số lượng nhân viên phòng ban:" + );
+            }
         }
     }
 
@@ -117,7 +120,7 @@ public class PhongBan {
     }
 
 
-//    public void updatePB(int id, ArrayList<PhongBan> phongBans, PhongBan pb) {
+    //    public void updatePB(int id, ArrayList<PhongBan> phongBans, PhongBan pb) {
 //
 //        boolean isExisted = false;
 //        System.out.print("Nhập vào mã phòng ban cần cập nhật: ");
@@ -163,7 +166,8 @@ public class PhongBan {
             }
         }
     }
-    public void deletePhongBan(int id,PhongBan phongBan){
+
+    public void deletePhongBan(int id, PhongBan phongBan) {
 
     }
 }
